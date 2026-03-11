@@ -1,0 +1,34 @@
+﻿<UserControl x:Class="Widger.Components.Modal_AboutApp"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Widger.Components"
+             xmlns:svgc="http://sharpvectors.codeplex.com/svgc/" 
+             mc:Ignorable="d" 
+             d:Background="{DynamicResource WindowBackground}"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
+        <Label Style="{DynamicResource LabelHeading}">About app</Label>
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,20,0,50">
+            <Label Margin="0,0,5,0">(C) Widger 2026. Created by</Label>
+            <svgc:SvgViewbox Source="Assets/Images/logo.svg" Width="80" />
+        </StackPanel>
+
+        <Label Style="{DynamicResource LabelHeading}">Third-party packages:</Label>
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Margin="0,0,0,20">
+            <Label>- Extended.Wpf.Toolkit (v5.0.0)</Label>
+            <Label>Author: Xceed</Label>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Margin="0,0,0,20">
+            <Label>- Hardcodet.NotifyIcon.Wpf (v2.0.1)</Label>
+            <Label>Author: Philipp Sumi, Robin Krom, Jan Karger</Label>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Margin="0,0,0,20">
+            <Label>- SharpVectors (v1.8.5)</Label>
+            <Label>Author: Elinam LLC (Japan)</Label>
+        </StackPanel>
+
+        <Button HorizontalAlignment="Left" Click="Close_Click">Close</Button>
+    </StackPanel>
+</UserControl>

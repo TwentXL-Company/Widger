@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="Widger.Components.Modal_CreateWidget"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Widger.Components"
+             mc:Ignorable="d" 
+             d:Background="{DynamicResource WindowBackground}"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0" Style="{DynamicResource LabelHeading}" Content="Create widget" Margin="0,0,0,30" />
+
+        <StackPanel Orientation="Vertical" Grid.Row="1">
+            <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="0,0,0,20">
+                <Label Content="Heading" />
+                <TextBox x:Name="Heading" />
+            </StackPanel>
+            <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="0,0,0,20">
+                <Label Content="Content" />
+                <TextBox x:Name="Content" AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" VerticalContentAlignment="Top" Height="150" />
+                <Label x:Name="ContentError" Content="This fill is required" FontSize="10" Foreground="{DynamicResource ErrorColor}" Visibility="Collapsed" />
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,20,0,0">
+            <Button Content="Create" Click="Create_Click" />
+            <Button Content="Cancel" Background="{DynamicResource ErrorColor}" Margin="30,0,0,0" Click="Cancel_Click" />
+        </StackPanel>
+    </Grid>
+</UserControl>
