@@ -12,15 +12,15 @@
     <!--TitleBar-->
     <Style x:Key="Title_Close" TargetType="Image">
         <Setter Property="Source" Value="Assets/Images/closeIcon.png" />
-        <Setter Property="Width" Value="20" />
+        <Setter Property="Width" Value="15" />
     </Style>
     <Style x:Key="Title_Minimize" TargetType="Image">
         <Setter Property="Source" Value="Assets/Images/minimizeIcon.png" />
-        <Setter Property="Width" Value="20" />
+        <Setter Property="Width" Value="15" />
     </Style>
     <Style x:Key="Title_Maximize" TargetType="Image">
         <Setter Property="Source" Value="Assets/Images/maximizeIcon.png" />
-        <Setter Property="Width" Value="20" />
+        <Setter Property="Width" Value="15" />
     </Style>
     <Style x:Key="TitleBar" TargetType="Grid">
         <Setter Property="Background" Value="{StaticResource ButtonColor}" />
