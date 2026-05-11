@@ -11,18 +11,22 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using Widger.Components;
 using Widger.Services;
+using Widger.Services.Interfaces;
 
 namespace Widger
 {
     public partial class MainWindow : Window
     {
         public static MainWindow? Instance;
+        private SaveWidgetService _saveWidget = new SaveWidgetService();
+
         public MainWindow()
         {
             InitializeComponent();
             ToastService.Initialize(MyToast);
             Instance = this;
-            SaveWidgetService.Load();
+
+            _saveWidget.Load();
         }
 
         protected override void OnClosing(CancelEventArgs e)
@@ -34,7 +38,7 @@ namespace Widger
 
         protected override void OnClosed(EventArgs e)
         {
-            SaveWidgetService.Save();
+            _saveWidget.Save();
             base.OnClosed(e);
         }
 

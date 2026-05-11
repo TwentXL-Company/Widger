@@ -10,16 +10,17 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using Widger.Components;
 using Widger.Models;
+using Widger.Services.Interfaces;
 
 namespace Widger.Services
 {
-    public static class SaveWidgetService
+    public class SaveWidgetService : ISaveWidgetService
     {
         private static readonly string localPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
         private static readonly string dirPath = Path.Combine(localPath, "Widger");
         public static readonly string widgetsPath = Path.Combine(dirPath, "widgets.json");
 
-        public static void Save()
+        public void Save()
         {
             try
             {
@@ -33,9 +34,9 @@ namespace Widger.Services
 
                         widgetList.Add(new WidgetModel
                         {
-                            Heading = widget.Heading.Content.ToString(),
+                            Heading = widget.Heading.Content.ToString() ?? "",
                             Content = widget.Content.Text,
-                            Date = widget.WidgetDate.Content.ToString(),
+                            Date = widget.WidgetDate.Content.ToString() ?? "",
                             BackgroundColor = widget.MainBorder.Background.ToString(),
                             TextColor = widget.Heading.Foreground.ToString(),
                             IsDesktop = isDesktop
@@ -57,7 +58,7 @@ namespace Widger.Services
             }
         }
 
-        public static void Load()
+        public void Load()
         {
             try
             {
