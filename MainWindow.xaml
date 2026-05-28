@@ -62,7 +62,7 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
-                    <svgc:SvgViewbox Grid.Column="0" Source="Assets/Images/logo_widger.svg" Width="100" HorizontalAlignment="Left" />
+                    <svgc:SvgViewbox Grid.Column="0" Source="Assets/Images/logo_widger.svg" Width="120" HorizontalAlignment="Left" />
 
                     <Button x:Name="BurgerMenu" Grid.Column="1" HorizontalAlignment="Right" Style="{DynamicResource Burger}" Click="BurgerMenu_Click">
                         <Button.ContextMenu>
