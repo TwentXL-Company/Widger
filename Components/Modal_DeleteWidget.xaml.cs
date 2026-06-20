@@ -29,6 +29,7 @@ namespace Widger.Components
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
             MainWindow.Instance?.WidgetsContent.Children?.Remove(Widget);
+
             ModalService.Hide();
             ToastService.ShowToast("The widget was deleted", Brushes.Red);
         }

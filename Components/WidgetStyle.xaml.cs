@@ -53,9 +53,8 @@ namespace Widger.Components
         {
             try
             {
-                Widget.MainBorder.Background = new SolidColorBrush(BgCanvas.SelectedColor ?? Colors.Transparent);
-                Widget.Heading.Foreground = new SolidColorBrush(TextCanvas.SelectedColor ?? Colors.Transparent);
-                Widget.Content.Foreground = new SolidColorBrush(TextCanvas.SelectedColor ?? Colors.Transparent);
+                Widget.MainBorder.Background = Widget.Heading.Foreground = Widget.Content.Foreground = new SolidColorBrush(BgCanvas.SelectedColor ?? Colors.Transparent);
+
                 this.Close();
                 ToastService.ShowToast("Saved", Brushes.Green);
             }
@@ -75,13 +74,9 @@ namespace Widger.Components
             if (e.NewValue is not Color c) return;
 
             if (ReferenceEquals(sender, BgCanvas))
-            {
                 BgHexTextBox.Text = ToHex(c);
-            }
             else if (ReferenceEquals(sender, TextCanvas))
-            {
                 TextHexTextBox.Text = ToHex(c);
-            }
         }
 
         private void BgOk_Click(object sender, RoutedEventArgs e) => BgPickButton.IsChecked = false;

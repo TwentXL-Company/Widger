@@ -25,22 +25,26 @@ namespace Widger.Services
             try
             {
                 List<WidgetModel> widgetList = new List<WidgetModel>();
-                UIElementCollection widgetsBlock = MainWindow.Instance?.WidgetsContent.Children;
-                foreach (var item in widgetsBlock)
-                {
-                    if (item is Widget widget)
-                    {
-                        bool isDesktop = widget.WidgetIsDesktop.Visibility == Visibility.Visible;
+                UIElementCollection? widgetsBlock = MainWindow.Instance?.WidgetsContent.Children;
 
-                        widgetList.Add(new WidgetModel
+                if (widgetsBlock != null)
+                {
+                    foreach (var item in widgetsBlock)
+                    {
+                        if (item is Widget widget)
                         {
-                            Heading = widget.Heading.Content.ToString() ?? "",
-                            Content = widget.Content.Text,
-                            Date = widget.WidgetDate.Content.ToString() ?? "",
-                            BackgroundColor = widget.MainBorder.Background.ToString(),
-                            TextColor = widget.Heading.Foreground.ToString(),
-                            IsDesktop = isDesktop
-                        });
+                            bool isDesktop = widget.WidgetIsDesktop.Visibility == Visibility.Visible;
+
+                            widgetList.Add(new WidgetModel
+                            {
+                                Heading = widget.Heading.Content.ToString() ?? "",
+                                Content = widget.Content.Text,
+                                Date = widget.WidgetDate.Content.ToString() ?? "",
+                                BackgroundColor = widget.MainBorder.Background.ToString(),
+                                TextColor = widget.Heading.Foreground.ToString(),
+                                IsDesktop = isDesktop
+                            });
+                        }
                     }
                 }
 
@@ -49,6 +53,7 @@ namespace Widger.Services
                     Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
                     WriteIndented = true
                 };
+
                 string json = JsonSerializer.Serialize(widgetList, options);
                 File.WriteAllText(widgetsPath, json);
             }

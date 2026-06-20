@@ -76,30 +76,16 @@ namespace Widger.Components
         {
             if (isEdit)
             {
-                MoreButton.Visibility = Visibility.Collapsed;
-                Heading.Visibility = Visibility.Collapsed;
-                ScrollContent.Visibility = Visibility.Collapsed;
-                Content.Visibility = Visibility.Collapsed;
-
-                SaveChangesButton.Visibility = Visibility.Visible;
-                HeadingEdited.Visibility = Visibility.Visible;
-                ScrollContentEdited.Visibility = Visibility.Visible;
-                ContentEdited.Visibility = Visibility.Visible;
+                MoreButton.Visibility = Heading.Visibility = ScrollContent.Visibility = Content.Visibility = Visibility.Collapsed;
+                SaveChangesButton.Visibility = HeadingEdited.Visibility = ScrollContentEdited.Visibility = ContentEdited.Visibility = Visibility.Visible;
 
                 HeadingEdited.Text = Heading.Content.ToString();
                 ContentEdited.Text = Content.Text;
             }
             else
             {
-                MoreButton.Visibility = Visibility.Visible;
-                Heading.Visibility = Visibility.Visible;
-                ScrollContent.Visibility = Visibility.Visible;
-                Content.Visibility = Visibility.Visible;
-
-                SaveChangesButton.Visibility = Visibility.Collapsed;
-                HeadingEdited.Visibility = Visibility.Collapsed;
-                ScrollContentEdited.Visibility = Visibility.Collapsed;
-                ContentEdited.Visibility = Visibility.Collapsed;
+                MoreButton.Visibility = Heading.Visibility = ScrollContent.Visibility = Content.Visibility = Visibility.Visible;
+                SaveChangesButton.Visibility = HeadingEdited.Visibility = ScrollContentEdited.Visibility = ContentEdited.Visibility = Visibility.Collapsed;
             }
         }
 
@@ -117,7 +103,6 @@ namespace Widger.Components
 
             widgetDesktop.Show();
             WidgetIsDesktop.Visibility = Visibility.Visible;
-            ToastService.ShowToast("Widget was added to desktop", Brushes.Green);
         }
     }
 }

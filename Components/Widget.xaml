@@ -6,8 +6,7 @@
              xmlns:local="clr-namespace:Widger.Components"
              xmlns:svgc="http://sharpvectors.codeplex.com/svgc/" 
              mc:Ignorable="d" 
-             d:Background="{DynamicResource WindowBackground}"
-             d:DesignHeight="450" d:DesignWidth="800"
+             d:DesignHeight="450" d:DesignWidth="500"
 >
 
     <Border x:Name="MainBorder" Style="{DynamicResource Widget}" Width="300" Height="170">
@@ -23,15 +22,14 @@
                    Style="{DynamicResource LabelHeading}"
                    Content="Heading" Margin="0,0,0,5" />
             <TextBox x:Name="HeadingEdited" Grid.Row="0" FontWeight="Bold" FontSize="16"
-                    HorizontalAlignment="Stretch" VerticalAlignment="Center" Style="{DynamicResource TextBoxSkeleton}"
-                    Text="Heading" Margin="0,0,0,5"/>
+                    HorizontalAlignment="Stretch" VerticalAlignment="Center" Style="{DynamicResource TextBoxSkeleton}" Margin="0,0,0,5"/>
             <svgc:SvgViewbox x:Name="WidgetIsDesktop" Grid.Row="0" Source="Assets/Images/addDesktop.svg" Height="15" HorizontalAlignment="Right" VerticalAlignment="Top" Visibility="Collapsed" />
 
             <ScrollViewer x:Name="ScrollContent" Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
                 <TextBlock x:Name="Content" TextWrapping="WrapWithOverflow" Text="Text" />
             </ScrollViewer>
             <ScrollViewer x:Name="ScrollContentEdited" Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-                <TextBox x:Name="ContentEdited" TextWrapping="WrapWithOverflow" Text="Text" AcceptsReturn="True" VerticalContentAlignment="Top" Style="{DynamicResource TextBoxSkeleton}" />
+                <TextBox x:Name="ContentEdited" TextWrapping="WrapWithOverflow" AcceptsReturn="True" VerticalContentAlignment="Top" Style="{DynamicResource TextBoxSkeleton}" />
             </ScrollViewer>
 
             <Button x:Name="MoreButton"

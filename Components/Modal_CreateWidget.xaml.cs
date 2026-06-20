@@ -37,11 +37,13 @@ namespace Widger.Components
             {
                 DateTime dateTime = DateTime.Now;
                 Widget widget = new Widget();
+
                 widget.Heading.Content = Heading.Text;
                 widget.Content.Text = Content.Text;
                 widget.WidgetDate.Content = dateTime.ToString("g");
 
                 MainWindow.Instance?.WidgetsContent.Children.Add(widget);
+
                 ModalService.Hide();
                 ToastService.ShowToast("Widget was created", Brushes.Green);
             }
