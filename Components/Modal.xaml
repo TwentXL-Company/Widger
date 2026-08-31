@@ -10,7 +10,7 @@
         <Rectangle Fill="Black" Opacity="0.5"/>
 
         <Border Style="{DynamicResource ModalDialog}">
-            <Grid x:Name="ModalContent" Width="300" />
+            <Grid x:Name="ModalContent" Width="400" />
         </Border>
     </Grid>
 </UserControl>

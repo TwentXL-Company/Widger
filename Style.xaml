@@ -28,6 +28,8 @@
     <Style x:Key="TitleBar_Button" TargetType="Button">
         <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Width" Value="40" />
+        <Setter Property="Height" Value="40" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
@@ -45,6 +47,34 @@
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
                             <Setter TargetName="border" Property="Background" Value="{StaticResource IconColor}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="TitleBar_ButtonClose" TargetType="Button">
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Width" Value="40" />
+        <Setter Property="Height" Value="40" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="border"
+                 Background="{TemplateBinding Background}"
+                 BorderBrush="{TemplateBinding BorderBrush}"
+                 BorderThickness="{TemplateBinding BorderThickness}">
+                        <ContentPresenter HorizontalAlignment="Center"
+                               VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="Background" Value="#ff6c68"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="border" Property="Background" Value="#ff8b88"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -71,14 +101,14 @@
         <Setter Property="FontFamily" Value="Assets/Fonts/Nunito-Regular.ttf#Nunito" />
         <Setter Property="Foreground" Value="#FFFFFF" />
         <Setter Property="Background" Value="{StaticResource ButtonColor}" />
-        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontSize" Value="16" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Padding" Value="15,5,15,5" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border Background="{TemplateBinding Background}" CornerRadius="10" Padding="{TemplateBinding Padding}">
+                    <Border Background="{TemplateBinding Background}" CornerRadius="5" Padding="{TemplateBinding Padding}">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
                 </ControlTemplate>
@@ -140,38 +170,6 @@
                 <Setter Property="Background" Value="{StaticResource ButtonHoverColor}" />
             </Trigger>
         </Style.Triggers>
-    </Style>
-    <Style x:Key="Burger" TargetType="Button">
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="Padding" Value="8,10"/>
-        <Setter Property="Cursor" Value="Hand" />
-        <Setter Property="Width" Value="40" />
-        <Setter Property="Height" Value="40" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="Button">
-                    <Border x:Name="border"
-                        Background="{TemplateBinding Background}"
-                        CornerRadius="5"
-                        Padding="{TemplateBinding Padding}">
-                        <Canvas Width="24" Height="18">
-                            <Line x:Name="line1" X1="0" Y1="0" X2="24" Y2="0" Stroke="{StaticResource ButtonColor}" StrokeThickness="4" StrokeStartLineCap="Round" StrokeEndLineCap="Round"/>
-                            <Line x:Name="line2" X1="0" Y1="9" X2="24" Y2="9" Stroke="{StaticResource ButtonColor}" StrokeThickness="4" StrokeStartLineCap="Round" StrokeEndLineCap="Round"/>
-                            <Line x:Name="line3" X1="0" Y1="18" X2="24" Y2="18" Stroke="{StaticResource ButtonColor}" StrokeThickness="4" StrokeStartLineCap="Round" StrokeEndLineCap="Round"/>
-                        </Canvas>
-                    </Border>
-
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="line1" Property="Stroke" Value="{StaticResource ButtonHoverColor}"/>
-                            <Setter TargetName="line2" Property="Stroke" Value="{StaticResource ButtonHoverColor}"/>
-                            <Setter TargetName="line3" Property="Stroke" Value="{StaticResource ButtonHoverColor}"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
     </Style>
 
     <!--TextBox-->

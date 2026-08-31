@@ -13,14 +13,19 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Widger.Services;
+using Widger.Services.Interfaces;
 
 namespace Widger.Components
 {
     public partial class Modal_CreateWidget : UserControl
     {
-        public Modal_CreateWidget()
+        private ISaveWidgetService _saveWidget;
+
+        public Modal_CreateWidget(ISaveWidgetService saveWidget)
         {
             InitializeComponent();
+
+            _saveWidget = saveWidget;
         }
 
         private void Create_Click(object sender, RoutedEventArgs e)
@@ -43,6 +48,7 @@ namespace Widger.Components
                 widget.WidgetDate.Content = dateTime.ToString("g");
 
                 MainWindow.Instance?.WidgetsContent.Children.Add(widget);
+                _saveWidget.Save();
 
                 ModalService.Hide();
                 ToastService.ShowToast("Widget was created", Brushes.Green);
@@ -54,8 +60,6 @@ namespace Widger.Components
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
-        {
-            ModalService.Hide();
-        }
+            => ModalService.Hide();
     }
 }

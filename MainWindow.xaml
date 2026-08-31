@@ -11,7 +11,7 @@
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Background="{DynamicResource WindowBackground}"
-        MinHeight="450" MinWidth="500"
+        MinHeight="500" MinWidth="500"
         Title="MainWindow" Height="650" Width="900">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0"
@@ -22,7 +22,7 @@
     <Border Background="{DynamicResource WindowBackground}" CornerRadius="0" BorderBrush="{DynamicResource ButtonColor}" BorderThickness="1">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="30" />
+                <RowDefinition Height="50" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
@@ -33,48 +33,27 @@
                 </Grid.ColumnDefinitions>
 
                 <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0">
-                    <Image Source="/Assets/Images/icon.png" Height="20" Margin="0,0,5,0" />
-                    <Label Foreground="#FFFFFF">widger</Label>
+                    <svgc:SvgViewbox Source="/Assets/Images/logo_widger.svg" Height="20" Margin="0,0,10,0" />
+                    <Button HorizontalAlignment="Right" Style="{DynamicResource Button_Link}" Click="AboutApp_Click" ToolTip="About app">
+                        <svgc:SvgViewbox Source="Assets/Images/faqIcon.svg" Width="15" />
+                    </Button>
                 </StackPanel>
 
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="2">
-                    <Button x:Name="ButtonMinimize" Width="40" Style="{DynamicResource TitleBar_Button}" Click="ButtonMinimize_Click">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="1" Margin="0,0,10,0">
+                    <Button x:Name="ButtonMinimize" Style="{DynamicResource TitleBar_Button}" Click="ButtonMinimize_Click">
                         <Image Style="{DynamicResource Title_Minimize}"/>
                     </Button>
-                    <Button x:Name="ButtonMaximize" Width="40" Style="{DynamicResource TitleBar_Button}" Click="ButtonMaximize_Click">
+                    <Button x:Name="ButtonMaximize" Style="{DynamicResource TitleBar_Button}" Click="ButtonMaximize_Click">
                         <Image Style="{DynamicResource Title_Maximize}"/>
                     </Button>
-                    <Button x:Name="ButtonClose" Width="40" Style="{DynamicResource TitleBar_Button}" Click="ButtonClose_Click">
+                    <Button x:Name="ButtonClose" Style="{DynamicResource TitleBar_ButtonClose}" Click="ButtonClose_Click">
                         <Image Style="{DynamicResource Title_Close}"/>
                     </Button>
                 </StackPanel>
             </Grid>
 
-            <Grid Grid.Row="1" Margin="30" Cursor="">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="50" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-
-                <Grid Grid.Row="0" Cursor="">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-
-                    <svgc:SvgViewbox Grid.Column="0" Source="Assets/Images/logo_widger.svg" Width="120" HorizontalAlignment="Left" />
-
-                    <Button x:Name="BurgerMenu" Grid.Column="1" HorizontalAlignment="Right" Style="{DynamicResource Burger}" Click="BurgerMenu_Click">
-                        <Button.ContextMenu>
-                            <ContextMenu>
-                                <MenuItem Header="Settings" Click="Settings_Click" />
-                                <MenuItem Header="About app" Click="AboutApp_Click" />
-                            </ContextMenu>
-                        </Button.ContextMenu>
-                    </Button>
-                </Grid>
-
-                <Grid Grid.Row="1" Margin="0,20,0,0">
+            <Grid Grid.Row="1" Margin="30">
+                <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="50" />
                         <RowDefinition Height="*" />

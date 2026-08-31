@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System.ComponentModel;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -18,13 +19,15 @@ namespace Widger
     public partial class MainWindow : Window
     {
         public static MainWindow? Instance;
-        private SaveWidgetService _saveWidget = new SaveWidgetService();
+        private ISaveWidgetService _saveWidget;
 
-        public MainWindow()
+        public MainWindow(ISaveWidgetService saveWidget)
         {
             InitializeComponent();
             ToastService.Initialize(MyToast);
+
             Instance = this;
+            _saveWidget = saveWidget;
 
             _saveWidget.Load();
         }
@@ -49,14 +52,10 @@ namespace Widger
         }
 
         private void ButtonClose_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
+            => this.Close();
 
         private void ButtonMinimize_Click(object sender, RoutedEventArgs e)
-        {
-            this.WindowState = WindowState.Minimized;
-        }
+            => this.WindowState = WindowState.Minimized;
 
         private void ButtonMaximize_Click(object sender, RoutedEventArgs e)
         {
@@ -66,31 +65,15 @@ namespace Widger
                 this.WindowState = WindowState.Maximized;
         }
 
-        private void BurgerMenu_Click(object sender, RoutedEventArgs e)
-        {
-            if (BurgerMenu.ContextMenu != null)
-            {
-                BurgerMenu.ContextMenu.PlacementTarget = BurgerMenu;
-                BurgerMenu.ContextMenu.Placement = PlacementMode.Left;
-                BurgerMenu.ContextMenu.IsOpen = true;
-            }
-        }
-
         private void AboutApp_Click(object sender, RoutedEventArgs e)
         {
             Modal_AboutApp aboutApp = new Modal_AboutApp();
             ModalService.Show(aboutApp);
         }
 
-        private void Settings_Click(object sender, RoutedEventArgs e)
-        {
-            Modal_Settings settings = new Modal_Settings();
-            ModalService.Show(settings);
-        }
-
         private void CreateWidget_Click(object sender, RoutedEventArgs e)
         {
-            Modal_CreateWidget createWidget = new Modal_CreateWidget();
+            Modal_CreateWidget createWidget = App.Services.GetRequiredService<Modal_CreateWidget>();
             ModalService.Show(createWidget);
         }
     }

@@ -14,7 +14,7 @@
             <RowDefinition Height="50" />
         </Grid.RowDefinitions>
 
-        <Label Grid.Row="0" Style="{DynamicResource LabelHeading}" Content="Create widget" Margin="0,0,0,30" />
+        <Label Grid.Row="0" Style="{DynamicResource LabelHeading}" FontSize="24" Content="Create widget" Margin="0,0,0,30" />
 
         <StackPanel Orientation="Vertical" Grid.Row="1">
             <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="0,0,0,20">
