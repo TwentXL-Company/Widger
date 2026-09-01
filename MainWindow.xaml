@@ -62,6 +62,7 @@
                     <Button Grid.Row="0" Content="+ Create new widget" HorizontalAlignment="Left" VerticalAlignment="Center" Click="CreateWidget_Click" Cursor="Hand" />
 
                     <Grid Grid.Row="1">
+                        <Label x:Name="HaveWidgetMessage" Content="You don’t have any widgets. Add your first widget" Margin="0,20,0,0" />
                         <ScrollViewer VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto">
                             <WrapPanel x:Name="WidgetsContent" Orientation="Vertical" />
                         </ScrollViewer>

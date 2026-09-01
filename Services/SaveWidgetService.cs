@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -35,7 +36,7 @@ namespace Widger.Services
                         {
                             bool isDesktop = widget.WidgetIsDesktop.Visibility == Visibility.Visible;
 
-                            widgetList.Add(new WidgetModel
+                            var model = new WidgetModel
                             {
                                 Heading = widget.Heading.Content.ToString() ?? "",
                                 Content = widget.Content.Text,
@@ -43,7 +44,15 @@ namespace Widger.Services
                                 BackgroundColor = widget.MainBorder.Background.ToString(),
                                 TextColor = widget.Heading.Foreground.ToString(),
                                 IsDesktop = isDesktop
-                            });
+                            };
+
+                            if (isDesktop && widget.DesktopWindow != null)
+                            {
+                                model.CoordinateX = (int)widget.DesktopWindow.Left;
+                                model.CoordinateY = (int)widget.DesktopWindow.Top;
+                            }
+
+                            widgetList.Add(model);
                         }
                     }
                 }
@@ -87,14 +96,16 @@ namespace Widger.Services
                 {
                     foreach (var item in widgetsList)
                     {
-                        string heading = item.Heading;
-                        string content = item.Content;
-                        string date = item.Date;
-                        string background = item.BackgroundColor;
-                        string textColor = item.TextColor;
+                        string? heading = item.Heading;
+                        string? content = item.Content;
+                        string? date = item.Date;
+                        double coordinateX = item.CoordinateX;
+                        double coordinateY = item.CoordinateY;
+                        string? background = item.BackgroundColor;
+                        string? textColor = item.TextColor;
                         bool isDesktop = item.IsDesktop;
 
-                        Widget widget = new Widget();
+                        Widget widget = App.Services.GetRequiredService<Widget>();
                         widget.Heading.Content = heading;
                         widget.Content.Text = content;
                         widget.WidgetDate.Content = date;
@@ -106,7 +117,7 @@ namespace Widger.Services
                         MainWindow.Instance?.WidgetsContent.Children.Add(widget);
 
                         if(isDesktop)
-                            widget.AddWidgetToDesktop(heading, content, date, background, textColor);
+                            widget.AddWidgetToDesktop(item);
                     }
                 }
             }

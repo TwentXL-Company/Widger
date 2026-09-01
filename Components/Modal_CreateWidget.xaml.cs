@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -41,7 +42,7 @@ namespace Widger.Components
             try
             {
                 DateTime dateTime = DateTime.Now;
-                Widget widget = new Widget();
+                Widget widget = App.Services.GetRequiredService<Widget>();
 
                 widget.Heading.Content = Heading.Text;
                 widget.Content.Text = Content.Text;
@@ -52,6 +53,7 @@ namespace Widger.Components
 
                 ModalService.Hide();
                 ToastService.ShowToast("Widget was created", Brushes.Green);
+                MainWindow.Instance?.UpdateWidgetMessage();
             }
             catch(Exception ex)
             {

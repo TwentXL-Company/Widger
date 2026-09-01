@@ -13,16 +13,20 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Widger.Services;
+using Widger.Services.Interfaces;
 
 namespace Widger.Components
 {
     public partial class Modal_DeleteWidget : UserControl
     {
         private Widget Widget;
+        private readonly ISaveWidgetService _saveWidget;
 
-        public Modal_DeleteWidget(Widget widget)
+        public Modal_DeleteWidget(Widget widget, ISaveWidgetService saveWidget)
         {
             InitializeComponent();
+
+            _saveWidget = saveWidget;
             Widget = widget;
         }
 
@@ -31,7 +35,9 @@ namespace Widger.Components
             MainWindow.Instance?.WidgetsContent.Children?.Remove(Widget);
 
             ModalService.Hide();
+            _saveWidget.Save();
             ToastService.ShowToast("The widget was deleted", Brushes.Red);
+            MainWindow.Instance?.UpdateWidgetMessage();
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,15 +13,23 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Widger.Models;
 using Widger.Services;
+using Widger.Services.Interfaces;
 
 namespace Widger.Components
 {
     public partial class Widget : UserControl
     {
-        public Widget()
+        public WidgetDesktop? DesktopWindow { get; set; }
+        private ISaveWidgetService _saveWidget;
+
+        public Widget(ISaveWidgetService saveWidget)
         {
             InitializeComponent();
+
+            _saveWidget = saveWidget;
+
             IsEdit(false);
         }
 
@@ -63,13 +72,24 @@ namespace Widger.Components
 
         private void AddToDesktop_Click(object sender, RoutedEventArgs e)
         {
-            AddWidgetToDesktop(this.Heading.Content.ToString(), this.Content.Text.ToString(), this.WidgetDate.Content.ToString(), this.MainBorder.Background.ToString(), this.Heading.Foreground.ToString());
+            WidgetModel model = new WidgetModel();
+
+            model.Heading = this.Heading.Content.ToString();
+            model.Content = this.Content.Text.ToString();
+            model.Date = this.WidgetDate.Content.ToString();
+            model.CoordinateX = 500;
+            model.CoordinateY = 200;
+            model.BackgroundColor = this.MainBorder.Background.ToString();
+            model.TextColor = this.Heading.Foreground.ToString();
+
+            AddWidgetToDesktop(model);
         }
 
         private void DeleteWidget_Click(object sedner, RoutedEventArgs e)
         {
-            Modal_DeleteWidget deleteWidget = new Modal_DeleteWidget(this);
-            ModalService.Show(deleteWidget);
+            var createDialog = App.Services.GetRequiredService<Func<Widget, Modal_DeleteWidget>>();
+            var deleteDialog = createDialog(this);
+            ModalService.Show(deleteDialog);
         }
 
         private void IsEdit(bool isEdit)
@@ -81,6 +101,8 @@ namespace Widger.Components
 
                 HeadingEdited.Text = Heading.Content.ToString();
                 ContentEdited.Text = Content.Text;
+
+                _saveWidget.Save();
             }
             else
             {
@@ -89,20 +111,23 @@ namespace Widger.Components
             }
         }
 
-        public void AddWidgetToDesktop(string? heading, string content, string? date, string background, string textColor)
+        public void AddWidgetToDesktop(WidgetModel model)
         {
             if(WidgetIsDesktop.Visibility == Visibility.Visible)
             {
                 ToastService.ShowToast("This widget is already use", Brushes.Red);
                 return;
             }
-            WidgetDesktop widgetDesktop = new WidgetDesktop(heading, content, date, background, textColor);
-
+            WidgetDesktop widgetDesktop = new WidgetDesktop(model);
+            
             widgetDesktop.Closed += (_, __) =>
                 WidgetIsDesktop.Visibility = Visibility.Collapsed;
 
             widgetDesktop.Show();
+            this.DesktopWindow = widgetDesktop;
             WidgetIsDesktop.Visibility = Visibility.Visible;
+
+            _saveWidget.Save();
         }
     }
 }

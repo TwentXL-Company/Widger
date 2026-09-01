@@ -30,6 +30,15 @@ namespace Widger
             _saveWidget = saveWidget;
 
             _saveWidget.Load();
+            UpdateWidgetMessage();
+        }
+
+        public void UpdateWidgetMessage()
+        {
+            HaveWidgetMessage.Visibility =
+                WidgetsContent.Children.Count == 0
+                ? Visibility.Visible
+                : Visibility.Collapsed;
         }
 
         protected override void OnClosing(CancelEventArgs e)

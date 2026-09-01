@@ -1,21 +1,37 @@
 ﻿using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
+using Widger.Models;
 
 namespace Widger.Components
 {
     public partial class WidgetDesktop : Window
     {
-        public WidgetDesktop(string? heading, string content, string? date, string background, string textColor)
+        private readonly WidgetModel _model;
+
+        public WidgetDesktop(WidgetModel model)
         {
             InitializeComponent();
-            this.Heading.Content = heading;
-            this.Content.Text = content;
-            this.WidgetDate.Content = date;
 
-            this.WidgetRoot.Background = new BrushConverter().ConvertFrom(background) as Brush;
-            this.Heading.Foreground = new BrushConverter().ConvertFrom(textColor) as Brush;
-            this.Content.Foreground = new BrushConverter().ConvertFrom(textColor) as Brush;
+            _model = model;
+
+            this.Heading.Content = model.Heading;
+            this.Content.Text = model.Content;
+            this.WidgetDate.Content = model.Date;
+
+            this.WidgetRoot.Background = new BrushConverter().ConvertFrom(model.BackgroundColor) as Brush;
+            this.Heading.Foreground = new BrushConverter().ConvertFrom(model.TextColor) as Brush;
+            this.Content.Foreground = new BrushConverter().ConvertFrom(model.TextColor) as Brush;
+
+            LocationChanged += WidgetDesktop_LocationChanged;
+            Left = model.CoordinateX;
+            Top = model.CoordinateY;
+        }
+
+        private void WidgetDesktop_LocationChanged(object? sender, EventArgs e)
+        {
+            _model.CoordinateX = (int)Left;
+            _model.CoordinateY = (int)Top;
         }
 
         private void WidgetDrag_MouseDown(object sender, MouseButtonEventArgs e)

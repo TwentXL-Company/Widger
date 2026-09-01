@@ -30,6 +30,10 @@ namespace Widger
 
             service.AddTransient<MainWindow>();
             service.AddTransient<Modal_CreateWidget>();
+            service.AddTransient<Widget>();
+            service.AddTransient<Func<Widget, Modal_DeleteWidget>>(sp => widget =>
+                new Modal_DeleteWidget(widget, sp.GetRequiredService<ISaveWidgetService>())
+            );
         }
 
         protected override void OnStartup(StartupEventArgs e)
